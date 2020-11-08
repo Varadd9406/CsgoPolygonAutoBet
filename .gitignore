@@ -1,3 +1,4 @@
 /.idea
 .env
 blank.py
+/__pycache__
