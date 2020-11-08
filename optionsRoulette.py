@@ -1,10 +1,8 @@
-from selenium.webdriver.common.action_chains import ActionChains
 
 
 class Roulette:
 	def __init__(self, driver):
 		self.driver = driver
-		self.actions = ActionChains(self.driver)
 
 	def findBalance(self):  # DONE
 		return int(self.driver.find_element_by_id("balance_p").text)
