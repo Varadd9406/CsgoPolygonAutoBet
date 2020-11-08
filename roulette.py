@@ -27,7 +27,11 @@ base = finalBase
 while True:
 	initial = game.findBalance()
 	game.placeBet(base)
-	time.sleep(35)
+	time.sleep(1)
+	if game.bettedAmount() == 0:
+		time.sleep(8)
+		continue
+	time.sleep(34)
 	final = game.findBalance()
 	if final == initial:
 		continue
