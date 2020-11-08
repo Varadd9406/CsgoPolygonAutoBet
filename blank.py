@@ -1,50 +1,27 @@
-import pytesseract, time, pyautogui, cv2
-from findNumberFromString import findNumberFromString
-import requests as rq
-import base64
-import json
+from selenium import webdriver
+import time
+from optionsRoulette import Roulette
+from dotenv import load_dotenv
+from os import getenv
 
-
-def visionApi(image):
-	API_KEY = "AIzaSyBG0Y7znwmqN22Gpxn96vfdUIS9xut_ddU"
-	url = f"https://vision.googleapis.com/v1/images:annotate?key={API_KEY}"
-	data = {
-		'requests': [
-			{
-				"image": {
-					"content": image
-				},
-				"features": [
-					{
-						"type": "DOCUMENT_TEXT_DETECTION"
-					}
-				]
-			}
-
-		]
-	}
-	s = json.dumps(data)
-	postreq = rq.post(url, data=s, headers={'Content-Type': 'application/json'})
-	output = json.loads(postreq.content)
-	num = output["responses"][0]["textAnnotations"][0]["description"]
-	num = (findNumberFromString(num))
-	print(num)
-	return num
-
-
-def set50inFull():
-	time.sleep(4)
-	pyautogui.click(x=1419, y=503, button='left')
-
-
-def findBalance():
-	img = pyautogui.screenshot('photo.png', region=(1703, 170, 1763 - 1703, 235 - 170))
-	with open('photo.png', 'rb') as image_file:
-		my_string = base64.b64encode(image_file.read())
-		my_string = str(my_string)
-		my_string = my_string[2:]
-		my_string = my_string[:len(my_string) - 1]
-		visionApi(my_string)
-
-
-findBalance()
+PATH = '/home/varad/Scripts/chromedriver'
+driver = webdriver.Chrome(PATH)
+driver.get("https://www.csgopolygon.com")
+signin = driver.find_element_by_class_name("window_steam_button")
+signin.click()
+time.sleep(2)
+load_dotenv()
+STEAM_USER = getenv("STEAM_USERNAME")
+STEAM_PASS = getenv("STEAM_PASSWORD")
+driver.find_element_by_id("steamAccountName").send_keys(STEAM_USER)
+driver.find_element_by_id("steamPassword").send_keys(STEAM_PASS)
+driver.find_element_by_id("imageLogin").click()
+n = int(input())
+if n == 1:
+	game = Roulette(driver)
+	print(game.findBalance())
+	game.betAmount(10)
+	time.sleep(1)
+	print(game.bettedAmount())
+else:
+	quit()

@@ -1,5 +1,5 @@
 import pyautogui, time
-from findBalance import findBalance
+from optionsRoulette import findBalance
 from Refresh import refresh
 
 def clickbetAmount(clicks=1):
