@@ -33,16 +33,12 @@ while True:
 	game.placeBet(base)
 	time.sleep(1)
 	if game.bettedAmount() == 0:
-		cnt += 1
 		time.sleep(8)
 		cnt += 1
 		continue
 	time.sleep(34)
 	final = game.findBalance()
-	if final == initial:
-		cnt += 1
-		continue
-	elif final > initial:
+	if final > initial:
 		cnt = 0
 		print('Won')
 		base = finalBase
@@ -50,4 +46,4 @@ while True:
 		cnt = 0
 		base *= 2
 		print('Trust the algo:', base)
-	cnt += 1
+	
