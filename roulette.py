@@ -26,7 +26,7 @@ finalBase = 3
 base = finalBase
 cnt = 0
 while True:
-	if cnt >= 5:
+	if cnt >= 50:
 		driver.refresh()
 		cnt = 0
 	initial = game.findBalance()
@@ -39,11 +39,9 @@ while True:
 	time.sleep(34)
 	final = game.findBalance()
 	if final > initial:
-		cnt = 0
 		print('Won')
 		base = finalBase
 	elif final < initial:
-		cnt = 0
 		base *= 2
 		print('Trust the algo:', base)
-	
+	cnt += 1
