@@ -24,24 +24,39 @@ else:
 game = Roulette(driver)
 finalBase = 3
 base = finalBase
-cnt = 0
+
 while True:
-	if cnt >= 50:
+	if game.reponsive():
+		initial = game.findBalance()
+	else:
+		time.sleep(20)
 		driver.refresh()
-		cnt = 0
-	initial = game.findBalance()
-	game.placeBet(base)
+		continue
+	if game.reponsive():
+		game.placeBet(base)
+	else:
+		time.sleep(20)
+		driver.refresh()
+		continue
 	time.sleep(1)
-	if game.bettedAmount() == 0:
-		time.sleep(8)
-		cnt += 1
+	if game.reponsive():
+		if game.bettedAmount() == 0:
+			time.sleep(8)
+			continue
+	else:
+		time.sleep(20)
+		driver.refresh()
 		continue
 	time.sleep(34)
-	final = game.findBalance()
+	if game.reponsive():
+		final = game.findBalance()
+	else:
+		time.sleep(20)
+		driver.refresh()
+		continue
 	if final > initial:
 		print('Won')
 		base = finalBase
 	elif final < initial:
 		base *= 2
 		print('Trust the algo:', base)
-	cnt += 1
