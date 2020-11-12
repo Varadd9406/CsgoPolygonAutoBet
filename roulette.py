@@ -22,10 +22,13 @@ if n == 1:
 else:
 	quit()
 game = Roulette(driver)
-finalBase = 3
+finalBase = 6
 base = finalBase
-
+cnt = 0
 while True:
+	if cnt >= 5:
+		driver.refresh()
+		cnt = 0
 	if game.reponsive():
 		initial = game.findBalance()
 	else:
@@ -42,6 +45,7 @@ while True:
 	if game.reponsive():
 		if game.bettedAmount() == 0:
 			time.sleep(8)
+			cnt += 1
 			continue
 	else:
 		time.sleep(20)
@@ -57,6 +61,10 @@ while True:
 	if final > initial:
 		print('Won')
 		base = finalBase
+		cnt = 0
 	elif final < initial:
 		base *= 2
+		cnt = 0
 		print('Trust the algo:', base)
+	else:
+		cnt += 1
