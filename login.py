@@ -17,3 +17,4 @@ def login_polygon_steam():
 	driver.find_element_by_id("steamAccountName").send_keys(STEAM_USER)
 	driver.find_element_by_id("steamPassword").send_keys(STEAM_PASS)
 	driver.find_element_by_id("imageLogin").click()
+	return driver
