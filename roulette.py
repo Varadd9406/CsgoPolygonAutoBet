@@ -42,12 +42,10 @@ while True:
 		driver.refresh()
 		continue
 	time.sleep(34)
-	if game.reponsive():
-		final = game.findBalance()
-	else:
+	while not game.reponsive():
 		time.sleep(20)
 		driver.refresh()
-		continue
+	final = game.findBalance()
 	if final > initial:
 		print('Won')
 		base = finalBase
