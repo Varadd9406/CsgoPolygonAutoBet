@@ -12,7 +12,7 @@ if n == 1:
 else:
 	quit()
 game = Roulette(driver)
-finalBase = 1
+finalBase = 8
 base = finalBase
 cnt = 0
 while True:
