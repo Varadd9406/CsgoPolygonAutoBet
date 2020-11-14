@@ -18,5 +18,5 @@ class Roulette:
 			self.driver.find_element_by_class_name("bet_clean_button").click()
 			return True
 		except:
-			print("BRUH")
+			print("Not Responsive")
 			return False
